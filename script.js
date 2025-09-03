@@ -118,9 +118,7 @@ nextBtn.addEventListener("click", async () => {
 
 fetchPokemon(currentId).catch(() => { });
 
-/* === Navegação por teclado (desktop) === */
 document.addEventListener("keydown", (e) => {
-  // evita navegação enquanto o usuário digita em um input/textarea ou conteúdo editável
   const active = document.activeElement;
   const isTyping = active && (
     active.tagName === "INPUT" ||
