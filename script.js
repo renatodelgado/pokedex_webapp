@@ -13,7 +13,7 @@ const heightEl = document.getElementById("height");
 const weightEl = document.getElementById("weight");
 const abilEl = document.getElementById("abilities");
 
-let currentId = 25;     // Pikachu inicia
+let currentId = 25;
 let shiny = false;
 
 function setTypes(types) {
@@ -42,14 +42,32 @@ function spriteFrom(data, shinyFlag) {
 }
 
 async function fetchPokemon(query) {
-    const q = String(query).trim().toLowerCase();
+    let q = String(query).trim().toLowerCase();
     if (!q) return;
+
+    if (!isNaN(q)) {
+        q = String(parseInt(q, 10));
+    }
 
     mainBtn.classList.add("active");
 
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${q}`);
-    if (!res.ok) throw new Error("Pokémon não encontrado.");
-    const data = await res.json();
+    let data;
+    try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${q}`);
+        if (!res.ok) throw new Error("Pokémon não encontrado direto.");
+        data = await res.json();
+    } catch {
+        try {
+            const allRes = await fetch("https://pokeapi.co/api/v2/pokemon?limit=2000");
+            const allData = await allRes.json();
+            const match = allData.results.find(p => p.name.includes(q));
+            if (!match) throw new Error("Pokémon não encontrado.");
+            const mres = await fetch(match.url);
+            data = await mres.json();
+        } catch {
+            throw new Error("Pokémon não encontrado.");
+        }
+    }
 
     let text = "Sem descrição disponível.";
     try {
@@ -72,6 +90,7 @@ async function fetchPokemon(query) {
     weightEl.textContent = `${(data.weight / 10).toFixed(1)} kg`;
     setAbilities(data.abilities);
 }
+
 
 searchForm.addEventListener("submit", async (e) => {
     e.preventDefault();

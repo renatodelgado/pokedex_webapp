@@ -24,13 +24,19 @@ body {
     color: #222;
 }
 
+a {
+    color: #d32f2f;
+    text-decoration: underline;
+}
+
+
 .pokedex-header {
     position: sticky;
     top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem 1rem;
+    padding: 2rem 1rem;
     background: #d32f2f;
     color: #fff;
     z-index: 10;
@@ -109,7 +115,8 @@ body {
     display: flex;
     gap: 8px;
     width: 100%;
-    max-width: 100%; /* garante que não ultrapasse a tela */
+    max-width: 100%;
+    /* garante que não ultrapasse a tela */
 }
 
 .search-box input {
@@ -127,7 +134,8 @@ body {
 }
 
 .search-box button {
-    flex-shrink: 0;     /* impede que o botão encolha */
+    flex-shrink: 0;
+    /* impede que o botão encolha */
     padding: 0 14px;
     border: none;
     border-radius: 10px;
@@ -179,7 +187,7 @@ body {
     border-radius: 999px;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: .85rem;
+    font-size: .65rem;
     color: #fff;
     margin-bottom: 2rem;
 }
@@ -318,9 +326,9 @@ body {
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: lighter;
     font-family: "Pokemon", Arial, sans-serif;
-    font-size: 1rem;
+    font-size: 0.75rem;
     color: #fff;
 
     background: linear-gradient(135deg, #ff8a00, #e52e71);
@@ -348,8 +356,8 @@ body {
 }
 
 .nav button {
-    width: 40px;
-    height: 40px;
+    width: 2rem;
+    height: 2rem;
     background-color: transparent;
     border: none;
     background-size: contain;
@@ -359,26 +367,26 @@ body {
     padding: 0;
 }
 
-#prevBtn {
-    background-image: url('assets/right-arrow.webp');
-    transform: scaleX(-1);
-}
-
-#nextBtn {
-    background-image: url('assets/right-arrow.webp');
-}
-
 .footer {
     text-align: center;
     padding: 16px 10px;
     color: #fff;
     background: #222;
-    font-size: .5rem;
+    font-size: .6rem;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.busca {
+    filter: invert(100%) sepia(0%) saturate(7470%) hue-rotate(116deg) brightness(109%) contrast(109%);
 }
 
 @media (max-width:720px) {
 
-        .pokedex-header {
+    .pokedex-header {
         justify-content: flex-end;
         padding-right: 1rem;
     }
