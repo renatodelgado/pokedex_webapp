@@ -13,6 +13,7 @@ const heightEl = document.getElementById("height");
 const weightEl = document.getElementById("weight");
 const abilEl = document.getElementById("abilities");
 
+let verShiny = "✦︎ Ver Shiny ✦︎";
 let currentId = 25;
 let shiny = false;
 
@@ -96,7 +97,7 @@ searchForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
         shiny = false;
-        shinyBtn.textContent = "✨ Ver Shiny";
+        shinyBtn.textContent = verShiny;
         await fetchPokemon(searchInp.value || currentId);
     } catch (err) {
         alert(err.message);
@@ -105,15 +106,15 @@ searchForm.addEventListener("submit", async (e) => {
 
 shinyBtn.addEventListener("click", async () => {
     shiny = !shiny;
-    shinyBtn.textContent = shiny ? "Ver Normal" : "✦︎ Ver Shiny ✦︎";
+    shinyBtn.textContent = shiny ? "Ver Normal" : verShiny;
     await fetchPokemon(currentId);
 });
 
 prevBtn.addEventListener("click", async () => {
-    if (currentId > 1) { shiny = false; shinyBtn.textContent = "✦︎ Ver Shiny ✦︎"; await fetchPokemon(currentId - 1); }
+    if (currentId > 1) { shiny = false; shinyBtn.textContent = verShiny; await fetchPokemon(currentId - 1); }
 });
 nextBtn.addEventListener("click", async () => {
-    shiny = false; shinyBtn.textContent = "✦︎ Ver Shiny ✦︎"; await fetchPokemon(currentId + 1);
+    shiny = false; shinyBtn.textContent = verShiny; await fetchPokemon(currentId + 1);
 });
 
 fetchPokemon(currentId).catch(() => { });
