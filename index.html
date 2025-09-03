@@ -1,64 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pokédex WebApp</title>
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex WebApp</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="pokedex-header">
-    <div class="pokedex-lights">
-      <button id="main-btn" class="main-light" aria-label="Botão principal"></button>
-      <span class="light red" aria-hidden="true"></span>
-      <span class="light yellow" aria-hidden="true"></span>
-      <span class="light green" aria-hidden="true"></span>
-    </div>
-    <h1 class="title">Pokédex WebApp</h1>
-  </header>
+    <header class="pokedex-header">
+        <div class="pokedex-lights">
+            <button id="main-btn" class="main-light" aria-label="Botão principal"></button>
+            <span class="light red" aria-hidden="true"></span>
+            <span class="light yellow" aria-hidden="true"></span>
+            <span class="light green" aria-hidden="true"></span>
+        </div>
+        <h1 class="title">Pokédex WebApp</h1>
+    </header>
 
-  <main class="container">
+    <main class="container">
 
-    <form id="searchForm" class="search-box" autocomplete="off">
-      <input id="searchInput" type="text" placeholder="Nome ou número do Pokémon"/>
-      <button id="searchBtn" type="submit" aria-label="Buscar">🔍</button>
-    </form>
-    
-    <section class="card">
-      <p id="pokemon-id" class="pid">#000</p>
-      <h2 id="pokemon-name" class="pname">POKÉMON</h2>
+        <form id="searchForm" class="search-box" autocomplete="off">
+            <input id="searchInput" type="text" placeholder="Nome ou número do Pokémon" />
+            <button id="searchBtn" type="submit" aria-label="Buscar">🔍</button>
+        </form>
 
-      <div class="pimg">
-        <img id="pokemon-image" alt="Sprite do Pokémon"/>
-      </div>
+        <section class="card">
+            <p id="pokemon-id" class="pid">#000</p>
+            <h2 id="pokemon-name" class="pname">POKÉMON</h2>
 
-      <div id="types" class="types"></div>
+            <div class="pimg">
+                <img id="pokemon-image" alt="Sprite do Pokémon" />
+            </div>
 
-      <p id="description" class="desc">Descrição aparecerá aqui.</p>
+            <div id="types" class="types"></div>
 
-      <div class="stats">
-        <div><span class="label">Altura</span><span id="height">—</span></div>
-        <div><span class="label">Peso</span><span id="weight">—</span></div>
-      </div>
+            <p id="description" class="desc">Descrição aparecerá aqui.</p>
 
-      <div class="abilities">
-        <h3>Habilidades</h3>
-        <div id="abilities"></div>
-      </div>
+            <div class="stats">
+                <div><span class="label">Altura</span><span id="height">—</span></div>
+                <div><span class="label">Peso</span><span id="weight">—</span></div>
+            </div>
 
-      <button id="shinyBtn" type="button" class="shiny">✨ Ver Shiny</button>
-    </section>
+            <div class="abilities">
+                <h3>Habilidades</h3>
+                <div id="abilities"></div>
+            </div>
 
-    <div class="nav">
-      <button id="prevBtn" type="button" aria-label="Anterior"></button>
-      <button id="nextBtn" type="button" aria-label="Próximo"></button>
-    </div>
-  </main>
+            <button id="shinyBtn" type="button" class="shiny">✨ Ver Shiny</button>
+        </section>
+
+        <div class="nav">
+            <button id="prevBtn" type="button" aria-label="Anterior"></button>
+            <button id="nextBtn" type="button" aria-label="Próximo"></button>
+        </div>
+    </main>
 
     <footer class="footer">
-        <p>Desenvolvido por <strong>Renato Delgado</strong> • Dados da PokéAPI • Atividade da disciplina <strong>Coding Mobile</strong> na Faculdade Senac Pernambuco</p>
+        <p>Desenvolvido por <strong>Renato Delgado</strong> • Dados da PokéAPI • Atividade da disciplina <strong>Coding
+                Mobile</strong> na Faculdade Senac Pernambuco</p>
     </footer>
 
-  <script src="script.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
+
 </html>
