@@ -59,6 +59,7 @@ a {
     box-shadow: inset -2px -2px 8px rgba(0, 0, 0, .4);
     cursor: pointer;
     transition: all .25s ease;
+    margin-right: 1rem;
 }
 
 .main-light.active {
@@ -353,6 +354,7 @@ a {
     display: flex;
     justify-content: space-between;
     margin-top: 18px;
+    position: relative;
 }
 
 .nav button {
@@ -365,6 +367,54 @@ a {
     background-position: center;
     cursor: pointer;
     padding: 0;
+}
+
+#prevBtn,
+#nextBtn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.28);        /* discreto */
+  backdrop-filter: blur(6px);             /* leve desfoque por trás */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 999;
+  cursor: pointer;
+  transition: transform .18s ease, background .18s ease, opacity .12s ease;
+  opacity: 0.85;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#prevBtn { left: 12px; }
+#nextBtn { right: 12px; }
+
+#prevBtn .icon,
+#nextBtn .icon {
+  width: 18px;
+  height: 18px;
+  /* inverte o ícone SVG para ficar visível no fundo escuro */
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1.1);
+  pointer-events: none; /* evita que o img capture o clique */
+}
+
+#prevBtn:hover,
+#nextBtn:hover,
+#prevBtn:focus,
+#nextBtn:focus {
+  transform: translateY(-50%) scale(1.06);
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.44);
+  outline: none;
+}
+
+#prevBtn:focus-visible,
+#nextBtn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.06), 0 0 0 6px rgba(0,0,0,0.2);
 }
 
 .footer {
@@ -400,6 +450,17 @@ a {
         width: 170px;
         height: 170px;
     }
+}
+
+@media (max-width: 420px) {
+  #prevBtn,
+  #nextBtn {
+    width: 40px;
+    height: 40px;
+    left: 8px;
+    right: 8px;
+    border-radius: 10px;
+  }
 }
 
 .search-box input::placeholder {

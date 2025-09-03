@@ -105,15 +105,81 @@ searchForm.addEventListener("submit", async (e) => {
 
 shinyBtn.addEventListener("click", async () => {
     shiny = !shiny;
-    shinyBtn.textContent = shiny ? "Ver Normal" : "✨ Ver Shiny";
+    shinyBtn.textContent = shiny ? "Ver Normal" : "✦︎ Ver Shiny ✦︎";
     await fetchPokemon(currentId);
 });
 
 prevBtn.addEventListener("click", async () => {
-    if (currentId > 1) { shiny = false; shinyBtn.textContent = "✨ Ver Shiny"; await fetchPokemon(currentId - 1); }
+    if (currentId > 1) { shiny = false; shinyBtn.textContent = "✦︎ Ver Shiny ✦︎"; await fetchPokemon(currentId - 1); }
 });
 nextBtn.addEventListener("click", async () => {
-    shiny = false; shinyBtn.textContent = "✨ Ver Shiny"; await fetchPokemon(currentId + 1);
+    shiny = false; shinyBtn.textContent = "✦︎ Ver Shiny ✦︎"; await fetchPokemon(currentId + 1);
 });
 
 fetchPokemon(currentId).catch(() => { });
+
+/* === Navegação por teclado (desktop) === */
+document.addEventListener("keydown", (e) => {
+  // evita navegação enquanto o usuário digita em um input/textarea ou conteúdo editável
+  const active = document.activeElement;
+  const isTyping = active && (
+    active.tagName === "INPUT" ||
+    active.tagName === "TEXTAREA" ||
+    active.isContentEditable
+  );
+  if (isTyping) return;
+
+  if (e.key === "ArrowLeft") {
+    // prev
+    if (typeof prevBtn.click === "function") prevBtn.click();
+  } else if (e.key === "ArrowRight") {
+    // next
+    if (typeof nextBtn.click === "function") nextBtn.click();
+  }
+});
+
+
+/* === Swipe (touch) simples para mobile/webapp === */
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartTime = 0;
+
+const SWIPE_MIN_DISTANCE = 50; // px mínimos para considerar swipe
+const SWIPE_MAX_TIME = 500;    // ms máximos para considerar swipe rápido
+
+function isInteractiveElement(el) {
+  // evita interceptar gestos quando o alvo é input/select/textarea/button ou dentro da search-box
+  return !!(el && el.closest && el.closest("input, textarea, select, button, .search-box"));
+}
+
+document.addEventListener("touchstart", (ev) => {
+  if (ev.touches.length > 1) return; // ignora multi-touch
+  if (isInteractiveElement(ev.target)) return; // não ativa se estiver digitando/pressionando algo
+  const t = ev.touches[0];
+  touchStartX = t.clientX;
+  touchStartY = t.clientY;
+  touchStartTime = ev.timeStamp;
+}, { passive: true });
+
+document.addEventListener("touchend", (ev) => {
+  // changedTouches oferece o touch final
+  const t = ev.changedTouches[0];
+  if (!t) return;
+  const dx = t.clientX - touchStartX;
+  const dy = t.clientY - touchStartY;
+  const dt = ev.timeStamp - touchStartTime;
+
+  // descarta se foi vertical ou muito lento ou curto
+  if (dt > SWIPE_MAX_TIME) return;
+  if (Math.abs(dx) < Math.abs(dy)) return;      // provavelmente scroll vertical
+  if (Math.abs(dx) < SWIPE_MIN_DISTANCE) return;
+
+  if (dx > 0) {
+    // swipe para a direita -> mostrar anterior
+    if (typeof prevBtn.click === "function") prevBtn.click();
+  } else {
+    // swipe para a esquerda -> mostrar próximo
+    if (typeof nextBtn.click === "function") nextBtn.click();
+  }
+}, { passive: true });
